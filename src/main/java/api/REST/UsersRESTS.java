@@ -26,15 +26,14 @@ public class UsersRESTS {
 		return ResponseEntity.ok(users);
 	}
 	
+	// find cities that start with x
 	@RequestMapping(value="{cityName}")
 	public ResponseEntity<List<String>> getCities(@PathVariable("cityName") String cityName){
-		User user = new User();
-		//get data from mysql
-		//List<String> cities = userDAO.findCitiesWithPartOfName(cityName);
-		//List<String> cities = userDAO.findCitiesWithPartOfName(cityName);
 		List<String> cities = userDAO.findNames(cityName);
 		return ResponseEntity.ok(cities);
 	}
+	
+	
 	
 	
 	

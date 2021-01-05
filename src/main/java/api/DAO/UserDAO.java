@@ -10,12 +10,11 @@ import api.entitys.User;
 
 public interface UserDAO extends JpaRepository<User, Long>{
 	
+	 // retrieve all active users
 	 List<User> findByFlagTrue();
 	 
-	 /*@Query("SELECT u.city FROM User u WHERE u.city LIKE (:cityName,'%')")
-	 List<String> findCitiesWithPartOfName(@Param("cityName") String cityName);*/
-	 
-	 @Query("SELECT u.city FROM User u where u.city = :cityName") 
+	 // retrieve not repeated cities that star with the indicated name
+	 @Query("SELECT DISTINCT u.city FROM User u where u.city LIKE :cityName%") 
 	    List<String> findNames(@Param("cityName") String cityName);
 	 
 	
