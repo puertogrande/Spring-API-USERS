@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,20 +19,24 @@ public class UsersRESTS {
 	@Autowired
 	private UserDAO userDAO;
 	
+	//find all active users
 	@GetMapping
 	public ResponseEntity<List<User>> getUsers(){
-		User user = new User();
-		//get data from mysql
-		List<User> users = userDAO.findAll();
+		List<User> users = userDAO.findByFlagTrue();
 		return ResponseEntity.ok(users);
-		
 	}
 	
-	//@GetMapping //localhost:8080
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
-	public String hello() {
-		return "hello world";
+	@RequestMapping(value="{cityName}")
+	public ResponseEntity<List<String>> getCities(@PathVariable("cityName") String cityName){
+		User user = new User();
+		//get data from mysql
+		//List<String> cities = userDAO.findCitiesWithPartOfName(cityName);
+		//List<String> cities = userDAO.findCitiesWithPartOfName(cityName);
+		List<String> cities = userDAO.findNames(cityName);
+		return ResponseEntity.ok(cities);
 	}
+	
+	
 	
 	
 }
