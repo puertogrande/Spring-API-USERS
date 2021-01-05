@@ -17,5 +17,8 @@ public interface UserDAO extends JpaRepository<User, Long>{
 	 @Query("SELECT DISTINCT u.city FROM User u where u.city LIKE :cityName%") 
 	    List<String> findNames(@Param("cityName") String cityName);
 	 
+	 List<User> findAllByOrderByIdDesc();
+	 List<User> findAllByOrderByIdAsc();
+	 
 	
 }
