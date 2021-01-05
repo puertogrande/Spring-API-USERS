@@ -1,7 +1,9 @@
 package api.entitys;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="products")
+@Table(name="users")
 public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -18,9 +20,10 @@ public class User {
 	private String surname;
 	private boolean flag;
 	//email must be verified before 
+	@Column(unique=true)
 	private String email;
 	private String city;
-	private LocalDateTime  birthday;
+	private LocalDate  birthday;
 	private LocalDateTime  creationDate;
 	
 	public Long getId() {
@@ -53,10 +56,10 @@ public class User {
 	public void setCity(String city) {
 		this.city = city;
 	}
-	public LocalDateTime getBirthday() {
+	public LocalDate getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(LocalDateTime birthday) {
+	public void setBirthday(LocalDate birthday) {
 		this.birthday = birthday;
 	}
 	public LocalDateTime getCreationDate() {
